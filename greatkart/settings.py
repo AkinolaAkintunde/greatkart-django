@@ -10,7 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+#from distutils.command.config import config
 from pathlib import Path
+from pyexpat.errors import messages
+from decouple import config
+import socket
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -139,3 +144,17 @@ MEDIA_ROOT = BASE_DIR /' media'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+from django.contrib.messages import constants as messages 
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger', 
+}
+
+# SMTP CONFIGURATION 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = True
+
+socket.getaddrinfo('localhost', 8080)
